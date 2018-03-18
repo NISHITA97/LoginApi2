@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<title>
+
+AngularJs $http.get() Service Response Example
+
+</title>
+
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+
+<script type="text/javascript">
+
+var app = angular.module('serviceApp', []);
+
+app.controller('serviceCtrl', function ($scope, $http) {
+
+
+ $scope.submitEmployee = function() {
+         
+       var url1 =   'http://localhost:9999/mavenproject2/webapi/myresource/'+$scope.form.firstName+'/'+$scope.form.lastName;      
+                        
+                        
+$http({
+
+method: 'GET',
+
+url: url1 
+
+}).then(function success(response) {
+
+ $scope.myWelcome = response.data;
+
+
+
+}, function error(response) {
+
+});
+                    
+         
+    };
+
+
+
+
+});
+
+</script>
+
+</head>
+
+<body>
+
+<div ng-app="serviceApp" ng-controller="serviceCtrl">
+
+
+
+<form ng-submit="submitEmployee()">
+            
+                    First Name
+                    <input type="text" ng-model="form.firstName" size="60" />
+                
+                    Last Name
+                   <input type="text" ng-model="form.lastName" size="60" />
+                <input type="submit" value="Submit" />
+                    </form>
+<div ng-repeat="post in myWelcome">
+    <h2> {{post.ans}} </h2>
+</div>
+</div>
+
+</body>
+
+</html>
